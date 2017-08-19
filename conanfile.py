@@ -46,3 +46,4 @@ class FlexConan(ConanFile):
 
     def package_info(self):
         self.cpp_info.libs = self.collect_libs()
+        self.env_info.path.append(path.join(self.package_folder, "bin"))
