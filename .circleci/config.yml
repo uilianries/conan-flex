@@ -7,8 +7,7 @@ version: 2
         command: |
           sudo pip install -U conan --upgrade
           sudo pip install -U conan_package_tools
-    - run:
-        command: conan user
+          conan user
     - run:
         name: Build recipe
         command: python build.py
@@ -35,19 +34,19 @@ jobs:
       - CONAN_GCC_VERSIONS: "6.3"
     <<: *conan-steps
 
-    clang-3.9:
-      docker:
-        - image: lasote/conanclang39
-      environment:
-        - CONAN_CLANG_VERSIONS: "3.9"
-      <<: *conan-steps
+  clang-3.9:
+    docker:
+      - image: lasote/conanclang39
+    environment:
+      - CONAN_CLANG_VERSIONS: "3.9"
+    <<: *conan-steps
 
-    clang-4.0:
-      docker:
-        - image: lasote/conanclang40
-      environment:
-        - CONAN_CLANG_VERSIONS: "4.0"
-      <<: *conan-steps
+  clang-4.0:
+    docker:
+      - image: lasote/conanclang40
+    environment:
+      - CONAN_CLANG_VERSIONS: "4.0"
+    <<: *conan-steps
 
 workflows:
   version: 2
