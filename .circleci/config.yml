@@ -1,0 +1,43 @@
+version: 2
+.conan-steps: &conan-steps
+  steps:
+    - sudo pip install -U conan --upgrade
+    - sudo pip install -U conan_package_tools
+    - conan user
+    - python build.py
+
+jobs:
+  gcc-4.9:
+    docker:
+      - image: lasote/conangcc49
+    environment:
+      - CONAN_GCC_VERSIONS: "4.9"
+    <<: *conan-steps
+
+  gcc-5.4:
+    docker:
+      - image: lasote/conangcc54
+    environment:
+      - CONAN_GCC_VERSIONS: "5.4"
+    <<: *conan-steps
+
+  gcc-6.3:
+    docker:
+      - image: lasote/conangcc49
+    environment:
+      - CONAN_GCC_VERSIONS: "6.3"
+    <<: *conan-steps
+
+    clang-3.9:
+      docker:
+        - image: lasote/conanclang39
+      environment:
+        - CONAN_CLANG_VERSIONS: "3.9"
+      <<: *conan-steps
+
+    clang-4.0:
+      docker:
+        - image: lasote/conanclang40
+      environment:
+        - CONAN_CLANG_VERSIONS: "4.0"
+      <<: *conan-steps
